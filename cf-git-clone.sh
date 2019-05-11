@@ -30,8 +30,6 @@ mkdir -p volume
 cd volume
 git config --global advice.detachedhead false
 
-REPOSITORY_LINK=${CF_COMMIT_URL%%//*}//$GIT_ACCESS_TOKEN@$(echo $CF_COMMIT_URL | sed -e "s/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/")/$CF_REPO_OWNER/$CF_REPO_NAME.git
-
 # Check if the cloned dir already exists from previous builds
 if [ -d "$CF_REPO_NAME" ]; then
   # Cloned dir already exists from previous builds so just fetch all the changes

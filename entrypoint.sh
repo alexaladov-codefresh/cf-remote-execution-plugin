@@ -14,6 +14,7 @@ chmod 600 /root/.ssh/id_rsa.pub
 
 echo "Preparing env variables..."
 export GIT_ACCESS_TOKEN=$(curl -s -H "Authorization: $CF_API_KEY" https://g.codefresh.io/api/contexts/$GIT_CONTEXT?decrypt=true | jq .spec.data.auth.password --raw-output)
+export REPOSITORY_LINK=${CF_COMMIT_URL%%//*}//$GIT_ACCESS_TOKEN@$(echo $CF_COMMIT_URL | sed -e "s/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/")/$CF_REPO_OWNER/$CF_REPO_NAME.git
 set | sed '/HOSTNAME=\|HOME=\|BASH=\|BASH_VERSINFO=\|BASHOPTS=\|BASH_ALIASES=\|BASH_ARGC=\|BASH_ARGV=\|EUID=\|PPID=\|SHELLOPTS=\|UID=\|TERM=\|PATH=\|PWD=/d'  | awk '$0="export "$0' > /cf-ssh-vars
 
 echo "Copying context..."
