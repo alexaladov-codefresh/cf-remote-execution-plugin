@@ -13,8 +13,8 @@ It allows cloning a repo and executing shell commands on a remote server, pipeli
  
  * SSH keys should be Base64 encoded:
  ```
- cat id_rsa | base64 |  tr -d '\040\011\012\015' 
- cat id_rsa.pub | base64 |  tr -d '\040\011\012\015'
+ cat id_rsa | base64 -w0
+ cat id_rsa.pub | base64 -w0
  ```
  
 ### Example:
